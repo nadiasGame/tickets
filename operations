@@ -1,0 +1,38 @@
+const nedb = require('nedb-promise');
+const database = new nedb({ filename: 'accounts.db', autoload: true });
+
+const ticket = {
+    "type": "ticket",
+    "menu":[
+      {
+        "id":1,
+        "title":"foofighters",
+        "desc":"konsert.",
+        "price":500
+      }
+    ]
+}
+async function getAccountByUsername(username){
+    const account = await database.find({ username: username});
+    return account;
+}
+function saveAccount(account) {
+    database.insert(account);
+}
+
+
+function saveAccount(account) {
+    database.insert(account);
+}  
+
+    function saveTicket() {
+        database.insert(ticket);
+    }
+    
+    async function getTicket() {
+        const ticket = await database.find({ type: 'ticket' });
+        return ticket;
+    }
+    module.exports ={
+        getAccountByUsername
+    }
