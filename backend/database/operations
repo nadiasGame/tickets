@@ -1,0 +1,87 @@
+const nedb = require('nedb-promise');
+const database = new nedb({ filename: 'accounts.db', autoload: true });
+
+const menu = {
+    "type": "event-menu",
+    "menu":[ {
+       
+                id: 1,
+                name: "Event 1",
+                date: "10th Sep",
+                time: "20:00 - 02:00",
+                location: "O1 Arena",
+                maxParticipants: 10,
+                tickets: [
+                  
+                ],
+                price: 100,
+              },
+              {
+                id: 2,
+                name: "Event 2",
+                date: "10th Sep",
+                time: "20:00 - 02:00",
+                location: "O2 Arena",
+                maxParticipants: 10,
+                tickets: [
+                  
+                ],
+                price: 100,
+              },
+              {
+                id: 3,
+                name: "Event 3",
+                date: "10th Sep",
+                time: "20:00 - 02:00",
+                location: "O3 Arena",
+                maxParticipants: 10,
+                tickets: [
+                  
+                ],
+                price: 100,
+              },
+              {
+                id: 4,
+                name: "Event 4",
+                date: "10th Sep",
+                time: "20:00 - 02:00",
+                location: "O4 Arena",
+                maxParticipants: 10,
+                tickets: [
+                  
+                ],
+                price: 100,
+              }
+        ]
+    }
+    
+
+    async function getAccountByUsername(username) {
+        const account = await database.find({ username: username });
+        return account;
+    }
+    
+    function saveAccount(account) {
+        database.insert(account);
+    }
+    
+    function saveMenu() {
+        database.insert(menu);
+    }
+    
+    async function getMenu() {
+        const menu = await database.find({ type: 'event-menu' });
+        return menu;
+    }
+    
+    function createOrderContainer() {
+      database.insert({ type: 'event-orders', orders: [] });
+    }
+    
+    function saveOrder(order) {
+      // Letar först upp vårt objekt som heter coffee-orders och sedan i arrayen orders pushar in beställningen (order)
+      database.update({ type: 'event-orders' }, { $push: { orders: order } }, {});
+    }
+    
+    module.exports = { getAccountByUsername, saveAccount, saveMenu, getMenu, 
+      createOrderContainer, saveOrder }

@@ -1,0 +1,23 @@
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu-item {
+    cursor: pointer;
+    margin-top: 1rem;
+    border: 2px solid #000000;
+    max-width: 250px;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-item:hover {
+    border: 2px double transparent;
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255)), radial-gradient(circle at left top, rgb(1, 110, 218), rgb(217, 0, 192));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    margin-top: 1rem;
+}
